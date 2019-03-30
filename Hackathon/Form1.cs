@@ -11,10 +11,13 @@ namespace Hackathon
     {
         int minChar = 2;
         int breakChar = 1;
+        double ArrayCount = 1;
 
         GameForm gameForm = new GameForm();
-        RPSForm rpsForm = new RPSForm();
+        RPSForm rpsForm = new RPSForm();            //Whats RPS Form
         SpaceInvaders spaceForm = new SpaceInvaders();
+        String[] Working;
+
 
         public Form1()
         {
@@ -23,8 +26,8 @@ namespace Hackathon
         }
 
         [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
-
+        static extern IntPtr GetForegroundWindow();     //What does this do
+                                                        //How does this run if its not in a void
         [DllImport("user32.dll")]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
@@ -33,9 +36,9 @@ namespace Hackathon
             const int nChars = 256;
             StringBuilder Buff = new StringBuilder(nChars);
             IntPtr handle = GetForegroundWindow();
-            
 
-            if (GetWindowText(handle, Buff, nChars) > 0)
+
+            if (GetWindowText(handle, Buff, nChars) > 0)//What does this do
             {
                 return Buff.ToString();
             }
@@ -51,19 +54,23 @@ namespace Hackathon
                 if (!String.IsNullOrEmpty(process.MainWindowTitle))
                 {
                     ProcessesListBox.Items.Add(process.MainWindowTitle);
+
                 }
             }
+
+            Working = new String[processlist.Length];
+            Working[0] = "Timeout";
             if (ProcessesListBox.Items.Contains("Timeout"))
                 ProcessesListBox.Items.Remove("Timeout");
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void refreshButton_Click(object sender, EventArgs e) //Refresh button, Refresh the list of windows
         {
             ProcessesListBox.Items.Clear();
             updateProcesses();
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e) //Starts the app.
         {
             if (ProcessesListBox.SelectedItem != null)
             {
@@ -95,15 +102,19 @@ namespace Hackathon
                 WorkTimeLabel.Text = $"{minutes}:00";
             }
             else MessageBox.Show("You must select the window you will be working on.");
-            
+
         }
 
         private void WorkTimer_Tick(object sender, EventArgs e)
         {
             string activeWindow = GetActiveWindowTitle();
-            string workWindow = (string)ProcessesListBox.SelectedItem;
-
-            if (activeWindow != workWindow)
+            //string workWindow = (string)ProcessesListBox.SelectedItem;
+            bool Alarm = false;
+            for(int i = 0; i < ArrayCount; i++)
+            {
+                Alarm = Alarm || (activeWindow.Equals(Working[i]));
+            }
+            if (!Alarm) //Checks to make sure your on work window. 
             {
                 if (softerRadioButton.Checked)
                 {
@@ -124,7 +135,7 @@ namespace Hackathon
         {
             int minutes = int.Parse(WorkTimeLabel.Text.Substring(0, minChar));
             int seconds = int.Parse(WorkTimeLabel.Text.Substring(minChar + 1));
-            
+
             if (minutes != 0 || seconds != 0)
             {
                 if (seconds != 0)
@@ -154,16 +165,16 @@ namespace Hackathon
                     breakChar = 1;
                     WorkTimeLabel.Text = $"{breakmins}:00";
                     breakTimer.Start();
-                    gameForm.Show();
+                    //  gameForm.Show();
                 }
                 else if (breakmins > 10 && breakmins < 99)
                 {
                     breakChar = 2;
                     WorkTimeLabel.Text = $"{breakmins}:00";
                     breakTimer.Start();
-                    gameForm.Show();
+                    //gameForm.Show();
                 }
-                else MessageBox.Show("Stop being lazy! Dont take such a long break."); 
+                else MessageBox.Show("Stop being lazy! Dont take such a long break.");
             }
         }
 
@@ -191,7 +202,7 @@ namespace Hackathon
             }
             else
             {
-                gameForm.Close();
+                // gameForm.Close();
                 MessageBox.Show("Break time is over. Get back to work!", "Timeout", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
                 breakTimer.Stop();
                 WorkTimeLabel.Text = $"{(int)WorkNumericUpDown.Value}:00";
@@ -199,5 +210,57 @@ namespace Hackathon
                 SecondTimer.Start();
             }
         }
+        private void Listchange(object sender, EventArgs e)
+        {
+
+            //SelectedBox.Items.Add(ProcessesListBox.SelectedItem);
+            if (!(SelectedBox.Items.Contains(ProcessesListBox.SelectedItem)))
+            {
+                SelectedBox.Items.Add(ProcessesListBox.SelectedItem);
+                Working[(int)ArrayCount] = (string)ProcessesListBox.SelectedItem;
+                ArrayCount++;
+
+            }
+            Report();
+
+        }
+
+        private void UndoListChange(object sender, EventArgs e)
+        {
+            int index = SelectedBox.Items.IndexOf(SelectedBox.Items) + 1;//0 is TimeOut, so the first index in box is second in array
+
+
+
+            if (!(index == (ArrayCount - 1)))//ArrayCount is the next index, so ArrayCount-1 is the Last.
+            {
+                for (int i = index; i < ArrayCount - 1; i++)
+                {
+                    Working[i] = Working[i + 1];
+                }
+            }
+            ArrayCount = ArrayCount - 0.5;
+
+            SelectedBox.Items.Remove(SelectedBox.SelectedItem);
+            Report();
+
+        }
+
+        private void Report() {// debuging class
+
+           // ReportCount.Text = ArrayCount.ToString() + " " + Working[0];
+            
+           // for(int i = 0; i < ArrayCount; i++)
+            //{
+
+            //}
+
+
+            }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
+      
 }

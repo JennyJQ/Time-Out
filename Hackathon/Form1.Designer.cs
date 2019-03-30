@@ -44,6 +44,7 @@
             this.breakTimer = new System.Windows.Forms.Timer(this.components);
             this.louderRadioButton = new System.Windows.Forms.RadioButton();
             this.softerRadioButton = new System.Windows.Forms.RadioButton();
+            this.SelectedBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.WorkNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BreakNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -55,9 +56,10 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(255, 61);
+            this.startButton.Location = new System.Drawing.Point(661, 93);
+            this.startButton.Margin = new System.Windows.Forms.Padding(4);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(113, 23);
+            this.startButton.Size = new System.Drawing.Size(151, 28);
             this.startButton.TabIndex = 0;
             this.startButton.Text = "Start Working";
             this.startButton.UseVisualStyleBackColor = true;
@@ -66,16 +68,20 @@
             // ProcessesListBox
             // 
             this.ProcessesListBox.FormattingEnabled = true;
-            this.ProcessesListBox.Location = new System.Drawing.Point(12, 32);
+            this.ProcessesListBox.ItemHeight = 16;
+            this.ProcessesListBox.Location = new System.Drawing.Point(16, 39);
+            this.ProcessesListBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProcessesListBox.Name = "ProcessesListBox";
-            this.ProcessesListBox.Size = new System.Drawing.Size(237, 251);
+            this.ProcessesListBox.Size = new System.Drawing.Size(315, 308);
             this.ProcessesListBox.TabIndex = 1;
+            this.ProcessesListBox.SelectedIndexChanged += new System.EventHandler(this.Listchange);
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(255, 32);
+            this.refreshButton.Location = new System.Drawing.Point(661, 57);
+            this.refreshButton.Margin = new System.Windows.Forms.Padding(4);
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(113, 23);
+            this.refreshButton.Size = new System.Drawing.Size(151, 28);
             this.refreshButton.TabIndex = 2;
             this.refreshButton.Text = "Refresh Windows";
             this.refreshButton.UseVisualStyleBackColor = true;
@@ -84,17 +90,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 13);
+            this.label1.Location = new System.Drawing.Point(16, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(237, 13);
+            this.label1.Size = new System.Drawing.Size(310, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Please select the window you will be working on:";
             // 
             // WorkNumericUpDown
             // 
-            this.WorkNumericUpDown.Location = new System.Drawing.Point(472, 29);
+            this.WorkNumericUpDown.Location = new System.Drawing.Point(950, 54);
+            this.WorkNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.WorkNumericUpDown.Name = "WorkNumericUpDown";
-            this.WorkNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.WorkNumericUpDown.Size = new System.Drawing.Size(160, 22);
             this.WorkNumericUpDown.TabIndex = 4;
             this.WorkNumericUpDown.Value = new decimal(new int[] {
             25,
@@ -104,9 +112,10 @@
             // 
             // BreakNumericUpDown
             // 
-            this.BreakNumericUpDown.Location = new System.Drawing.Point(472, 68);
+            this.BreakNumericUpDown.Location = new System.Drawing.Point(950, 102);
+            this.BreakNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.BreakNumericUpDown.Name = "BreakNumericUpDown";
-            this.BreakNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.BreakNumericUpDown.Size = new System.Drawing.Size(160, 22);
             this.BreakNumericUpDown.TabIndex = 5;
             this.BreakNumericUpDown.Value = new decimal(new int[] {
             5,
@@ -117,18 +126,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(469, 13);
+            this.label2.Location = new System.Drawing.Point(946, 34);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(242, 13);
+            this.label2.Size = new System.Drawing.Size(321, 17);
             this.label2.TabIndex = 6;
             this.label2.Text = "Indicate the length of the work session in minutes:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(471, 52);
+            this.label3.Location = new System.Drawing.Point(949, 82);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(240, 13);
+            this.label3.Size = new System.Drawing.Size(320, 17);
             this.label3.TabIndex = 7;
             this.label3.Text = "Indicate the length of the break period in minutes:";
             // 
@@ -136,9 +147,10 @@
             // 
             this.WorkTimeLabel.AutoSize = true;
             this.WorkTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WorkTimeLabel.Location = new System.Drawing.Point(395, 130);
+            this.WorkTimeLabel.Location = new System.Drawing.Point(848, 178);
+            this.WorkTimeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.WorkTimeLabel.Name = "WorkTimeLabel";
-            this.WorkTimeLabel.Size = new System.Drawing.Size(284, 108);
+            this.WorkTimeLabel.Size = new System.Drawing.Size(358, 135);
             this.WorkTimeLabel.TabIndex = 8;
             this.WorkTimeLabel.Text = "00:00";
             // 
@@ -155,9 +167,10 @@
             // louderRadioButton
             // 
             this.louderRadioButton.AutoSize = true;
-            this.louderRadioButton.Location = new System.Drawing.Point(256, 105);
+            this.louderRadioButton.Location = new System.Drawing.Point(662, 147);
+            this.louderRadioButton.Margin = new System.Windows.Forms.Padding(4);
             this.louderRadioButton.Name = "louderRadioButton";
-            this.louderRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.louderRadioButton.Size = new System.Drawing.Size(119, 21);
             this.louderRadioButton.TabIndex = 9;
             this.louderRadioButton.Text = "Louder Sound";
             this.louderRadioButton.UseVisualStyleBackColor = true;
@@ -166,19 +179,31 @@
             // 
             this.softerRadioButton.AutoSize = true;
             this.softerRadioButton.Checked = true;
-            this.softerRadioButton.Location = new System.Drawing.Point(256, 128);
+            this.softerRadioButton.Location = new System.Drawing.Point(662, 176);
+            this.softerRadioButton.Margin = new System.Windows.Forms.Padding(4);
             this.softerRadioButton.Name = "softerRadioButton";
-            this.softerRadioButton.Size = new System.Drawing.Size(87, 17);
+            this.softerRadioButton.Size = new System.Drawing.Size(112, 21);
             this.softerRadioButton.TabIndex = 10;
             this.softerRadioButton.TabStop = true;
             this.softerRadioButton.Text = "Softer Sound";
             this.softerRadioButton.UseVisualStyleBackColor = true;
             // 
+            // SelectedBox
+            // 
+            this.SelectedBox.FormattingEnabled = true;
+            this.SelectedBox.ItemHeight = 16;
+            this.SelectedBox.Location = new System.Drawing.Point(339, 39);
+            this.SelectedBox.Name = "SelectedBox";
+            this.SelectedBox.Size = new System.Drawing.Size(315, 308);
+            this.SelectedBox.TabIndex = 11;
+            this.SelectedBox.SelectedIndexChanged += new System.EventHandler(this.UndoListChange);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 297);
+            this.ClientSize = new System.Drawing.Size(1292, 366);
+            this.Controls.Add(this.SelectedBox);
             this.Controls.Add(this.softerRadioButton);
             this.Controls.Add(this.louderRadioButton);
             this.Controls.Add(this.WorkTimeLabel);
@@ -191,8 +216,10 @@
             this.Controls.Add(this.ProcessesListBox);
             this.Controls.Add(this.startButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Timeout";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.WorkNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BreakNumericUpDown)).EndInit();
             this.ResumeLayout(false);
@@ -216,6 +243,7 @@
         private System.Windows.Forms.Timer breakTimer;
         private System.Windows.Forms.RadioButton louderRadioButton;
         private System.Windows.Forms.RadioButton softerRadioButton;
+        private System.Windows.Forms.ListBox SelectedBox;
     }
 }
 
